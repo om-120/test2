@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfedw.ttf) format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLGT9Z1xlEA.ttf) format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlEA.ttf) format('truetype');
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        body {
+            background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+            ;
+        }
+        
+        nav {
+            padding-bottom: -3px;
+            background-color: rgb(38, 18, 112);
+        }
+        
+        nav:after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+        
+        nav .logo {
+            color: blueviolet;
+            font-size: 27px;
+            font-weight: 600;
+            line-height: 70px;
+            padding-left: 0px;
+            padding-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        nav ul {
+            float: right;
+            margin-right: 40px;
+            list-style: none;
+            position: relative;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        nav ul li a {
+            color: rgb(172, 56, 56);
+            line-height: 70px;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 15px;
+        }
+        
+        nav ul li a:hover {
+            color: cyan;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #33ffff, 0 0 10px #66ffff;
+        }
+        
+        nav ul ul li a:hover {
+            box-shadow: none;
+        }
+        
+        nav ul ul {
+            position: absolute;
+            top: 90px;
+            border-top: 3px solid cyan;
+            opacity: 0;
+            visibility: hidden;
+            transition: top 0.3s;
+        }
+        
+        nav ul ul ul {
+            border-top: none;
+        }
+        
+        nav ul li:hover>ul {
+            top: 70px;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        nav ul ul li {
+            position: relative;
+            margin: 0px;
+            width: 150px;
+            float: none;
+            display: list-item;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+        
+        nav ul ul li a {
+            line-height: 50px;
+        }
+        
+        nav ul ul ul li {
+            position: relative;
+            top: -60px;
+            left: 150px;
+        }
+        
+        .show,
+        .icon,
+        input {
+            display: none;
+        }
+        
+        .fa-plus {
+            font-size: 15px;
+            margin-left: 40px;
+        }
+        
+        @media all and (max-width: 968px) {
+            nav ul {
+                margin-right: 0px;
+                float: left;
+            }
+            nav .logo {
+                padding-left: 30px;
+                width: 100%;
+            }
+            .show+a,
+            ul {
+                display: none;
+            }
+            nav ul li,
+            nav ul ul li {
+                display: block;
+                width: 100%;
+            }
+            nav ul li a:hover {
+                box-shadow: none;
+            }
+            .show {
+                display: block;
+                color: white;
+                font-size: 18px;
+                padding: 0 20px;
+                line-height: 70px;
+                cursor: pointer;
+            }
+            .show:hover {
+                color: cyan;
+            }
+            .icon {
+                display: block;
+                color: white;
+                position: absolute;
+                top: 0;
+                right: 40px;
+                line-height: 70px;
+                cursor: pointer;
+                font-size: 25px;
+            }
+            nav ul ul {
+                top: 70px;
+                border-top: 0px;
+                float: none;
+                position: static;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+            }
+            nav ul ul a {
+                padding-left: 40px;
+            }
+            nav ul ul ul a {
+                padding-left: 80px;
+            }
+            nav ul ul ul li {
+                position: static;
+            }
+            [id^=btn]:checked+ul {
+                display: block;
+            }
+            nav ul ul li {
+                border-bottom: 0px;
+            }
+            span.cancel:before {
+                content: '\f00d';
+            }
+        }
+        
+        ul.wrapper li {
+            background-color: black;
+            color: white;
+            line-height: 0px;
+        }
+        /* meet our team */
+        
+        .column {
+            float: left;
+            width: 33.3%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+        }
+        
+        @media screen and (max-width: 650px) {
+            .column {
+                width: 100%;
+                display: block;
+            }
+        }
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            border: none;
+            border-radius: 90px;
+        }
+        
+        .card img {
+            margin: 0 auto;
+        }
+        
+        .container {
+            padding: 0 16px;
+        }
+        
+        .container::after,
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .title {
+            color: hsl(337, 78%, 45%);
+        }
+        
+        .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo"><img src="img/logo.png" alt="" width="67px">
+            <div class="nav-menu">
+                <label for="btn" class="icon">
+                    <span class="fa fa-bars"></span>
+                        </label>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="addmission.html">Online Addmission</a></li>
+                    <li>
+                        <label for="btn-2" class="show"></label>
+                        <a href="#">Faculties</a>
+                        <ul class="wrapper">
+                            <li><a href="#">Eng Medium</a></li>
+                            <li><a href="#">Nep Medium</a></li>
+                            <li><a href="#">Technical</a></li>
+                            <li>
+                                <label for="btn-3" class="show">Collages</label>
+                                <a href="#">More <span class="fa fa-plus"></span></a>
+                                <ul>
+                                    <li><a href="#">Eduation</a></li>
+                                    <li><a href="#">Management</a></li>
+                                    <li><a href="#">Science</a></li>
+                                    <li><a href="#">Tech Sci</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="meetourteam.html">Our Team</a></li>
+                    <li>
+                        <label for="btn-1" class="show">Facuties</label>
+                        <a href="#">About us</a>
+                    </li>
+                </ul>
+    </nav>
+    <h1 style="color: black;text-align: center; font-size: 36px; font-weight: bold;padding:10px 0">Our Teacher Teams</h1>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="img/binod.jpg" alt="Principal" style="width:50%;display: flex;justify-content: center;">
+                <div class="container">
+                    <h2>Binod Mehta</h2>
+                    <p class="title">Principal</p>
+                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                    <p>example@example.com</p>
+                    <p><button class="button">Contact</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="img/nandkishor.jpg" alt="nandkishor" style="width:50%;display: flex;justify-content: center;">
+                <div class="container">
+                    <h2>NandKishor Sir</h2>
+                    <p class="title">Vice-Principal</p>
+                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                    <p>example@example.com</p>
+                    <p><button class="button">Contact</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="img/sanjay c++.jpg" alt="co-ordinater" style="width:50%;display: flex;justify-content: center;">
+                <div class="container">
+                    <h2> Er.Sanjay Sir</h2>
+                    <p class="title">Dip medium co-ordi</p>
+                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                    <p>example@example.com</p>
+                    <p><button class="button">Contact</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <img src="img/shambhu.jpg" alt="co-ordinater" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Shambhu Sir</h2>
+                <p class="title">Eng medium co-ordi</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/ramanada.jpg" alt="co-ordinater" style="width:50%;display: flex;justify-content: center">
+            <div class="container">
+                <h2>Ramanand Sir</h2>
+                <p class="title"> Nep medium co-ordi</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/rajindra.jpg" alt="Accountant" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Rajindra Sir</h2>
+                <p class="title">Accountant</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/santosh.jpg" alt="Teacher" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Er Santosh Shah</h2>
+                <p class="title">Hardware Netwoking & programmer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/arjun.jpg" alt="Teacher" style="width:50%;display: flex; justify-content: center;">
+            <div class="container">
+                <h2>Arjun Sir</h2>
+                <p class="title">Account Teacher</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/rambalak.jpg" alt="Teacher" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Rambalak Sir</h2>
+                <p class="title">Math Teacher</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/babunand.jpg" alt="Teacher" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Babunand Sir</h2>
+                <p class="title">Computer Teacher</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/brijesh.jpg" alt="teacher" style="width:50%; display:flex;justify-content: center;">
+            <div class="container">
+                <h2>Birjesh Sir</h2>
+                <p class="title">Chemistry teacher</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="img/jokhan.jpg" alt="teacher" style="width:50%;display: flex;justify-content: center;">
+            <div class="container">
+                <h2>Jokhan Sir</h2>
+                <p class="title">Physics Teacher</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
